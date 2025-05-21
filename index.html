@@ -20,23 +20,27 @@
       background: rgba(0,0,0,0.5);
       padding: 2rem;
       border-radius: 12px;
-      max-width: 320px;
+      max-width: 360px;
       width: 100%;
       text-align: center;
     }
     h2 { margin-top: 0; font-size: 1.5rem; }
-    label, p { display:block; margin: 1rem 0 0.25rem; text-align: left; }
+    label, p, .note { display:block; margin: 1rem 0 0.25rem; text-align: left; }
     input, button {
-      width: 100%;
       padding: 0.5rem;
-      margin-bottom: 0.75rem;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       background: white;
       color: #333;
     }
+    input {
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
     button {
+      width: 100%;
+      margin-top: 0.5rem;
       background: #28a745;
       color: #fff;
       cursor: pointer;
@@ -44,7 +48,13 @@
     button:hover { opacity: 0.9; }
     .note { font-size: 0.8rem; color: #f88; margin-bottom:1rem; }
     .calculator p { text-align: center; margin: 0.5rem 0; }
-    .calculator input { margin-top: 0.5rem; }
+    .calculator p input {
+      width: 4rem;
+      display: inline-block;
+      text-align: center;
+      margin: 0 0.25rem;
+    }
+    .calculator output { display: none; }
   </style>
 </head>
 <body>
@@ -68,22 +78,22 @@
 
     <!-- Calculator -->
     <div class="calculator">
-      <p>If you deposit "<span id="inputVal">0</span>" USDT,</p>
-      <p>You will get "<span id="outputVal">0</span>" USDT</p>
-      <input type="number" id="deposit" placeholder="Amount">
+      <p>If you deposit "<input type="number" id="deposit" value="1.00" step="0.01">" USDT,</p>
+      <p>You will get "<span id="outputVal">10.00</span>" USDT</p>
     </div>
   </div>
 
   <script>
     const deposit = document.getElementById('deposit');
-    const inputVal = document.getElementById('inputVal');
     const outputVal = document.getElementById('outputVal');
 
-    deposit.addEventListener('input', () => {
+    function updateOutput() {
       const val = parseFloat(deposit.value) || 0;
-      inputVal.textContent = val.toFixed(2);
       outputVal.textContent = (val * 10).toFixed(2);
-    });
+    }
+    deposit.addEventListener('input', updateOutput);
+    // initialize
+    updateOutput();
   </script>
 </body>
 </html>
